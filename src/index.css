@@ -1,0 +1,289 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 33% 3%;
+    --foreground: 210 40% 98%;
+
+    --card: 228 33% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 228 33% 3%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 348 100% 66%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 187 89% 60%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 217 19% 27%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 275 91% 57%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 19% 27%;
+    --input: 217 19% 27%;
+    --ring: 348 100% 66%;
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-blockbid-dark text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom scroll bars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-blockbid-darker;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-blockbid-gray rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-blockbid-accent;
+}
+
+/* Card styling */
+.blockbid-card {
+  @apply bg-gradient-to-br from-blockbid-blue to-blockbid-darkblue border border-blockbid-light/10 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:border-blockbid-accent/30;
+}
+
+/* Button styling */
+.blockbid-button {
+  @apply px-6 py-3 bg-blockbid-accent text-white font-bold rounded-md shadow-md hover:bg-blockbid-accent-hover transition-all duration-300 flex items-center justify-center gap-2;
+}
+
+.blockbid-button-secondary {
+  @apply px-6 py-3 bg-blockbid-secondary text-blockbid-darker font-bold rounded-md shadow-md hover:bg-blockbid-secondary/80 transition-all duration-300 flex items-center justify-center gap-2;
+}
+
+.blockbid-button-tertiary {
+  @apply px-6 py-3 bg-blockbid-tertiary text-white font-bold rounded-md shadow-md hover:bg-blockbid-tertiary/80 transition-all duration-300 flex items-center justify-center gap-2;
+}
+
+/* Text effects */
+.text-gradient {
+  @apply bg-gradient-to-r from-blockbid-accent via-blockbid-secondary to-blockbid-tertiary bg-clip-text text-transparent;
+}
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass effect */
+.glass-panel {
+  @apply backdrop-blur-lg bg-blockbid-darkblue/40 border border-blockbid-light/10 shadow-lg transition-all duration-300;
+}
+
+/* Animation utilities */
+.animated-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  animation: border-animation 3s linear infinite;
+}
+
+@keyframes border-animation {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Hero section animations */
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating {
+  animation: floating 6s ease-in-out infinite;
+}
+
+/* Background grid */
+.bg-grid {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 84, 112, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 84, 112, 0.05) 1px, transparent 1px);
+}
+
+/* Card glow effect */
+.glow {
+  position: relative;
+}
+
+.glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 84, 112, 0.3), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.glow:hover::after {
+  opacity: 1;
+}
+
+/* Shimmer effect */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(233, 233, 233, 0) 0,
+    rgba(233, 233, 233, 0.1) 20%,
+    rgba(233, 233, 233, 0.5) 60%,
+    rgba(233, 233, 233, 0)
+  );
+  animation: shimmer 2s infinite;
+  content: '';
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* New animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce-horizontal {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+.animate-bounce-horizontal {
+  animation: bounce-horizontal 1s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+.animate-scale-up {
+  animation: scale-up 0.5s ease-out forwards;
+}
+
+/* Add more subtle animations on hover */
+.hover-scale {
+  @apply transition-transform duration-300;
+}
+
+.hover-scale:hover {
+  @apply transform scale-105;
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(255, 84, 112, 0.6);
+  transform: translateY(-3px);
+}
